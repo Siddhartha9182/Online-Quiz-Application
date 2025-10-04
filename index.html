@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz Master</title>
+    <!-- Load Tailwind CSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link to external custom styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Quiz Container -->
+    <div id="quiz-container" class="w-full max-w-xl bg-white shadow-2xl rounded-xl p-6 md:p-10 border border-gray-100 transition-all duration-500">
+
+        <h1 class="text-3xl font-extrabold text-indigo-700 mb-6 text-center">
+            Quiz Master <span id="app-id-display" class="block text-xs font-normal text-gray-500 mt-1">App ID: Loading...</span>
+        </h1>
+        
+        <!-- Timer and Progress Bar -->
+        <div id="quiz-status" class="hidden space-y-4 mb-8">
+            <div class="flex justify-between items-center text-gray-600 font-medium">
+                <span id="question-progress" class="text-sm">Question 1 of 5</span>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                    </svg>
+                    <span id="timer" class="text-lg font-bold text-red-600">60s</span>
+                </div>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                <div id="progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="text-center py-10">
+            <p class="text-gray-600 mb-6 text-lg">Test your knowledge with five quick-fire general knowledge questions. You have 60 seconds!</p>
+            <button id="start-button" class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105">
+                Start Quiz
+            </button>
+            <div id="auth-status" class="mt-4 text-sm text-gray-500">Initializing secure session...</div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="hidden">
+            <h2 id="question-text" class="text-xl md:text-2xl font-semibold text-gray-800 mb-6 leading-relaxed"></h2>
+            
+            <div id="choices-container" class="space-y-4">
+                <!-- Answer buttons will be injected here -->
+            </div>
+            
+            <button id="next-button" class="hidden w-full mt-6 px-4 py-3 bg-indigo-500 text-white font-semibold rounded-lg shadow-md opacity-0 transition duration-300 pointer-events-none" disabled>
+                Next Question
+            </button>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="hidden text-center py-10">
+            <h2 class="text-3xl font-bold text-green-600 mb-4">Quiz Complete!</h2>
+            <p id="result-message" class="text-xl text-gray-700 mb-6"></p>
+            <p class="text-sm text-gray-500 mb-2">Time used: <span id="time-taken" class="font-semibold text-gray-800">0s</span></p>
+            <p class="text-sm text-gray-500 mb-8">Score saved: <span id="save-status" class="font-semibold text-indigo-600">Waiting...</span></p>
+            <button id="restart-button" class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105">
+                Try Again
+            </button>
+        </div>
+
+        <!-- Custom Alert/Error Box -->
+        <div id="error-box" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div class="bg-white rounded-lg p-6 max-w-sm w-full shadow-2xl text-center">
+                <h3 id="error-title" class="text-xl font-bold text-red-600 mb-3">Error</h3>
+                <p id="error-message" class="text-gray-600 mb-4">An unknown error occurred.</p>
+                <button onclick="document.getElementById('error-box').classList.add('hidden')" class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">Close</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Link to external JavaScript file with module type for Firebase -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>
